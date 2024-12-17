@@ -31,7 +31,7 @@ function CaptainLogin() {
           
           {/* Form Section */}
           <form className="-mt-4" onSubmit={submitHandler}>
-            <h3 className="text-lg font-medium mb-2">What's your email?</h3>
+            <h3 className="text-lg font-medium mb-2">Hey captain ! What's your email?</h3>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -63,8 +63,8 @@ function CaptainLogin() {
         {/* New Account Link */}
         <p className="mt-4 text-center text-semibold mb-32">
           As a fleet?{' '}
-          <Link to="/Captain-Signup" className="text-blue-600">
-            Register as a user
+          <Link to="/Captain-Singup" className="text-blue-600">
+            Register as a Captain
           </Link>
         </p>
 
@@ -74,7 +74,7 @@ function CaptainLogin() {
             to="/login"
             className="flex items-center justify-center w-full bg-[#d59d34] text-white font-semibold rounded px-4 py-2 placeholder:text-base"
           >
-            Sign in as user
+            Sign in as Captain
           </Link>
         </div>
       </div>

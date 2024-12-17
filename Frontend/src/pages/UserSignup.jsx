@@ -100,7 +100,7 @@ function UserSignup() {
         </p>
 
         {/* Footer Text - Positioned at the bottom */}
-        <p className="mt-auto font-semibold text-center">
+        <p className="mt-auto font-semibold text-center text-xs">
           Uber for Business is a platform for managing global rides and meals,
           and local deliveries, for companies of any size.
         </p>
