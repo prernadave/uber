@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const userModel = require("../models/user.model");
 const { createUser } = require("../services/user.service");
+const BlacklistedToken = require("../models/blacklistToken");
 
 
 module.exports.registerUser = async(req,res,next)=>{
@@ -64,6 +65,12 @@ module.exports.loginUser = async (req,res,next)=>{
 
         const token = user.generateToken();
 
+        res.cookie('token', token, {
+            httpOnly: true, // Ensures cookie is not accessible via client-side scripts
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+            maxAge: 3600000, // 1 hour
+        });
+
         res.status(200).json({token,user,message:"login successfull"})
     
     } catch (error) {
@@ -75,3 +82,18 @@ module.exports.getUserProfile = async (req,res,next)=>{
     res.status(200).json(req.user);
     
 }
+
+
+module.exports.logoutUser = async(req,res,next)=>{
+    res.clearCookie('token')
+    const token = req.cookies?.token || req.headers.authorization
+await BlacklistedToken.create({token})
+    res.status('200').json({message:'logged out'})
+}
+
+
+
+// {
+//     "email": "johndoe@example.com",
+//     "password": "Password123"
+//   }

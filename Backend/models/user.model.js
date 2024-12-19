@@ -14,10 +14,7 @@ const userSchema = new mongoose.Schema({
             minlength: [ 3, 'Last name must be at least 3 characters long' ],
         }
     },
-    lastname:{
-        type:String,
-        minlength:[3,'Last Name must be at least 3 characters long.']
-    },
+  
 
     email:{
         type:String,
@@ -40,7 +37,7 @@ type:String
 })
 
 userSchema.methods.generateToken = function () {
-    return jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
+    return jwt.sign({ _id: this._id }, process.env.JWT_SECRET,{expiresIn:'24h'});
 };
 
 userSchema.methods.comparePassword = async function (password) {
