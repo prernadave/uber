@@ -74,7 +74,7 @@ function CaptainLogin() {
             to="/login"
             className="flex items-center justify-center w-full bg-[#d59d34] text-white font-semibold rounded px-4 py-2 placeholder:text-base"
           >
-            Sign in as Captain
+            Sign in as User
           </Link>
         </div>
       </div>
