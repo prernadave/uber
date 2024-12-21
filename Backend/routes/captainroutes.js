@@ -1,6 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const { registerCaptain } = require('../controllers/captain.controller');
+const { registerCaptain, loginCaptain, getCaptainProfile } = require('../controllers/captain.controller');
+const { authCaptain } = require('../middleware/auth.middleware');
 const captainRouter = express.Router();
 
 captainRouter.post(
@@ -63,5 +64,24 @@ captainRouter.post(
     ],
 registerCaptain
 );
+
+
+captainRouter.post('/login',[
+    body('email').isEmail().withMessage('Invalid email address.'),
+    body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters.')
+],loginCaptain);
+
+
+module.exports.getUserProfile = async (req,res,next)=>{
+    res.status(200).json(req.user);
+    
+}
+
+
+captainRouter.get('/profile',authCaptain, getCaptainProfile)
+
+
+captainRouter.get('/logout',loginCaptain)
+
 
 module.exports = captainRouter;
